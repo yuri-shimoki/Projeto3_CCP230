@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 int menuPrincipal(void)
 {
@@ -42,24 +43,20 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
         {
                 printf("Digite o nome do produto: ");
 
-                char nomeDoProduto[255];
+                char nomeDoProduto[255], nomeDoProdutoTrimmed[255];
                 scanf(" %254s", nomeDoProduto);
 
-                char* primeiroNaoEspaco = NULL;
-                for (char* c = nomeDoProduto; *c != '\0'; ++c)
-                {
-                        if (*c == ' ')
-                                continue;
+                int indiceInicial, indiceFinal;
+                trim(nomeDoProduto, &indiceInicial, &indiceFinal);
 
-                        if (primeiroNaoEspaco == NULL)
-                                primeiroNaoEspaco = c;
-
-                        *c = tolower(*c);
-                }
+                for (int i = indiceInicial; i != indiceFinal + 1; ++i)
+                        nomeDoProdutoTrimmed[i - indiceInicial] = tolower(nomeDoProduto[i]);
+                
+                nomeDoProdutoTrimmed[indiceFinal + 1 - indiceInicial] = '\0';
 
                 Produto produtoRequisitado;
                 int codigoDeRetorno;
-                codigoDeRetorno = buscarProdutoPorNome(primeiroNaoEspaco, listaDeProdutos, &produtoRequisitado);
+                codigoDeRetorno = buscarProdutoPorNome(nomeDoProdutoTrimmed, listaDeProdutos, &produtoRequisitado);
 
                 if (codigoDeRetorno < 0)
                 {
@@ -188,7 +185,54 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
         ++produto.codigo;
 
         printf("Digite o nome do produto: ");
+
+        char nomeDoProduto[255];
+        scanf(" %254s", nomeDoProduto);
+
+        int indiceInicial, indiceFinal;
+        trim(nomeDoProduto, &indiceInicial, &indiceFinal);
+
+        for (int i = indiceInicial; i != indiceFinal + 1; ++i)
+                produto.nome[i - indiceInicial] = tolower(nomeDoProduto[i]);
         
+        produto.nome[indiceFinal + 1 - indiceInicial] = '\0';
+
+        printf("Digite o preco unitario do produto: ");
+
+        int n;
+        n = scanf("%f", &produto.precoUnitario);
+
+        if (n == 0 || produto.precoUnitario < 0.0f)
+        {
+                puts("O preco unitario digitado e invalido.\n");
+                pressioneEnterParaContinuar;
+                return -1;
+        }
+
+        printf("Digite a quantidade em estoque do produto: ");
+
+        n = scanf("%i", &produto.quantidadeEmEstoque);
+
+        if (n == 0)
+        {
+                puts("A quantidade em estoque digitada e invalida.\n");
+                pressioneEnterParaContinuar;
+                return -2;
+        }
+
+        printf("Digite a descricao do produto: ");
+        scanf(" %1022s", produto.descricao);
+
+        ++listaDeProdutos->quantidadeDeProdutos;
+        Produto* novoBlocoDeProdutos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos);
+        memcpy(novoBlocoDeProdutos, listaDeProdutos->produtos, sizeof(Produto) * (listaDeProdutos->quantidadeDeProdutos - 1));
+
+        free(listaDeProdutos->produtos);
+        listaDeProdutos->produtos = novoBlocoDeProdutos;
+
+        listaDeProdutos->produtos[listaDeProdutos->quantidadeDeProdutos-1] = produto;
+
+        return 0;
 }
 
 void gerarRelatorioDeEstoque(ListaDeProdutos* produto)
@@ -217,4 +261,28 @@ int abrirArquivoParaLeituraEEscrita(FILE** arquivo, const char* nome)
         }
 
         return 0;
+}
+
+void trim(char* string, int* indiceInicialPtr, int* indiceFinalPtr)
+{
+        int indiceInicial = 0;
+        for (char* c = string; *c != '\0'; ++c)
+        {
+                if (*c == ' ')
+                        ++indiceInicial;
+                else
+                        break;
+        }
+
+        int indiceFinal = strlen(string) - 1;
+        for (char* c = &string[indiceFinal]; *c != indiceInicial; --c)
+        {
+                if (*c == ' ')
+                        --indiceFinal;
+                else
+                        break;
+        }
+
+        *indiceInicialPtr = indiceInicial;
+        *indiceFinalPtr = indiceFinal;
 }
