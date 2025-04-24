@@ -235,9 +235,38 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
         return 0;
 }
 
-void gerarRelatorioDeEstoque(ListaDeProdutos* produto)
+int gerarRelatorioDeEstoque(ListaDeProdutos* listaDeProdutos)
 {
+        FILE* arquivoDeRelatorio = fopen("relatorio.txt", "w");
 
+        if (ferror(arquivoDeRelatorio) != 0)
+        {
+                puts("Falha ao abrir arquivo de relatorio.\n");
+                pressioneEnterParaContinuar();
+                return -1;
+        }
+
+        for (int i = 0; i < listaDeProdutos->quantidadeDeProdutos; ++i)
+        {
+                Produto produto = listaDeProdutos->produtos[i];
+
+                fprintf(arquivoDeRelatorio, "------------------------\nCodigo do produto: %i\nNome do produto: %s\nPreco unitario: %f\nQuantidade em estoque: %i\nValor total: %f\nDescricao: %s\n\n",
+                        produto.codigo,
+                        produto.nome,
+                        produto.precoUnitario,
+                        produto.quantidadeEmEstoque,
+                        produto.precoUnitario * ((float) produto.quantidadeEmEstoque),
+                        produto.descricao);
+
+                if (ferror(arquivoDeRelatorio) != 0)
+                {
+                        puts("Falha ao escrever no arquivo de relatorio.\n");
+                        pressioneEnterParaContinuar();
+                        return -2;
+                }
+        }
+        
+        return 0;
 }
 
 void pressioneEnterParaContinuar(void)
