@@ -59,16 +59,20 @@ int main(void)
                         menuAtual = MENU_PRINCIPAL;
                         break;
                 case COMPRAR_PRODUTO:
-
+                        comprarProduto(&listaDeProdutos);
+                        menuAtual = MENU_PRINCIPAL;
                         break;
                 case VENDER_PRODUTO:
-
+                        venderProduto(&listaDeProdutos);
+                        menuAtual = MENU_PRINCIPAL;
                         break;
                 case CADASTRAR_PRODUTO:
-
+                        cadastrarProduto(&listaDeProdutos);
+                        menuAtual = MENU_PRINCIPAL;
                         break;
                 case GERAR_RELATORIO_DE_ESTOQUE:
-
+                        gerarRelatorioDeEstoque(&listaDeProdutos);
+                        menuAtual = MENU_PRINCIPAL;
                         break;
                 }
         }
