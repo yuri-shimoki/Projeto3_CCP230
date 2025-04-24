@@ -27,3 +27,4 @@ void gerarRelatorioDeEstoque(ListaDeProdutos* produto);
 
 void pressioneEnterParaContinuar(void);
 int abrirArquivoParaLeituraEEscrita(FILE** arquivo, const char* nome);
+void trim(char* string, int* indiceInicial, int* indiceFinal);
