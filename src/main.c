@@ -40,7 +40,8 @@ int main(void)
                 break;
         }
 
-        
+
+        salvarListaDeProdutos(&arquivoDeEstoque, &listaDeProdutos);
 
         free(listaDeProdutos.produtos);
         fclose(arquivoDeEstoque);

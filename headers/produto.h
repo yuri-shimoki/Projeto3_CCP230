@@ -18,7 +18,7 @@ typedef struct
 } ListaDeProdutos;
 
 int carregarListaDeProdutos(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProdutos);
-int salvarListaDeProduto(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProdutos);
+int salvarListaDeProdutos(FILE** arquivoDeEstoque, ListaDeProdutos* listaDeProdutos);
 
 int buscarProdutoPorNome(const char* nomeDoProduto, Produto* dadosDoProduto);
 int buscarProdutoPorCodigo(unsigned int codigoDoProduto, Produto* dadosDoProduto);
