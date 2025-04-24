@@ -13,3 +13,4 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos);
 void gerarRelatorioDeEstoque(ListaDeProdutos* produto);
 
 void pressioneEnterParaContinuar(void);
+int abrirArquivoParaLeituraEEscrita(FILE** arquivo, const char* nome);
