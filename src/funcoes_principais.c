@@ -5,7 +5,7 @@
 
 int menuPrincipal(void)
 {
-        printf("---[MENU PRINCIPAL]---\nDigite qual opcao abaixo deseja realizar:\n1. Consultar estoque\n2. Comprar produto\n3. Vender produto\n4. Gerar relatorio de estoque\n0. Sair\nDigite um numero: ");
+        printf("---[MENU PRINCIPAL]---\nDigite qual opcao abaixo deseja realizar:\n1. Consultar estoque\n2. Comprar produto\n3. Vender produto\n4. Cadastrar produto\n5. Gerar relatorio de estoque\n0. Sair\nDigite um numero: ");
 
         int opcaoDigitada;
         scanf("%i", &opcaoDigitada);
@@ -23,7 +23,7 @@ int menuPrincipal(void)
 
 int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
 {
-        // Se a quantidade de produtos != 0 e qdp % 50 == 0, alocar mais espaço
+        
 }
 
 void pressioneEnterParaContinuar(void)

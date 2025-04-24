@@ -10,6 +10,7 @@ typedef enum
         CONSULTAR_ESTOQUE,
         COMPRAR_PRODUTO,
         VENDER_PRODUTO,
+        CADASTRAR_PRODUTO,
         GERAR_RELATORIO_DE_ESTOQUE,
         MENU_PRINCIPAL
 } Menus;

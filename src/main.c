@@ -59,18 +59,22 @@ int main(void)
                                 break;
                         case -2:
                                 menuAtual = MENU_PRINCIPAL;
-                                puts("O valor digitado nao e um numero de 0 a 4.\n");
+                                puts("O valor digitado nao e um numero de 0 a 5.\n");
                                 pressioneEnterParaContinuar();
                                 break;
                         }
                         break;
                 case CONSULTAR_ESTOQUE:
+                        
 
                         break;
                 case COMPRAR_PRODUTO:
 
                         break;
                 case VENDER_PRODUTO:
+
+                        break;
+                case CADASTRAR_PRODUTO:
 
                         break;
                 case GERAR_RELATORIO_DE_ESTOQUE:
