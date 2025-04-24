@@ -50,23 +50,13 @@ int main(void)
                         codigoDeRetorno = menuPrincipal();
                         menuAtual = codigoDeRetorno;
 
-                        switch (codigoDeRetorno)
-                        {
-                        case -1:
+                        if (codigoDeRetorno < 0)
                                 menuAtual = MENU_PRINCIPAL;
-                                puts("O valor digitado nao e um numero.\n");
-                                pressioneEnterParaContinuar();
-                                break;
-                        case -2:
-                                menuAtual = MENU_PRINCIPAL;
-                                puts("O valor digitado nao e um numero de 0 a 5.\n");
-                                pressioneEnterParaContinuar();
-                                break;
-                        }
+                        
                         break;
                 case CONSULTAR_ESTOQUE:
-                        
-
+                        consultarEstoque(&listaDeProdutos);
+                        menuAtual = MENU_PRINCIPAL;
                         break;
                 case COMPRAR_PRODUTO:
 

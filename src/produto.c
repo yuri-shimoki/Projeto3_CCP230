@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "funcoes_principais.h"
 
@@ -17,7 +18,7 @@ int carregarListaDeProdutos(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProd
                 return 1;
         }
 
-        listaDeProdutos->produtos = malloc(listaDeProdutos->quantidadeDeProdutos);
+        listaDeProdutos->produtos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos);
 
         fread(listaDeProdutos->produtos, listaDeProdutos->quantidadeDeProdutos, 1, arquivoDeEstoque);
 
@@ -38,9 +39,9 @@ int salvarListaDeProdutos(FILE** arquivoDeEstoque, ListaDeProdutos* listaDeProdu
                 return 1;
         }
 
-        abrirArquivoParaLeituraEEscrita(&arquivoDeEstoque, "estoque.bin");
+        abrirArquivoParaLeituraEEscrita(arquivoDeEstoque, "estoque.bin");
 
-        fwrite(listaDeProdutos->quantidadeDeProdutos, sizeof(unsigned int), 1, *arquivoDeEstoque);
+        fwrite(&listaDeProdutos->quantidadeDeProdutos, sizeof(unsigned int), 1, *arquivoDeEstoque);
 
         if (ferror(*arquivoDeEstoque) != 0)
         {
