@@ -23,7 +23,7 @@ int comprarProduto(ListaDeProdutos* listaDeProdutos);
 int venderProduto(ListaDeProdutos* listaDeProdutos);
 
 int cadastrarProduto(ListaDeProdutos* listaDeProdutos);
-void gerarRelatorioDeEstoque(ListaDeProdutos* produto);
+int gerarRelatorioDeEstoque(ListaDeProdutos* produto);
 
 void pressioneEnterParaContinuar(void);
 int abrirArquivoParaLeituraEEscrita(FILE** arquivo, const char* nome);
