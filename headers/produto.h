@@ -11,6 +11,14 @@ typedef struct
         float precoUnitario;
 } Produto;
 
-int carregarDadosDeProduto(FILE* arquivoDeEstoque, const char* nomeDoProduto);
-int carregarDadosDeProduto(FILE* arquivoDeEstoque, unsigned int codigoDoProduto);
-int salvarDadosDeProduto(FILE* arquivoDeEstoque, Produto* produto);
+typedef struct
+{
+        unsigned int quantidadeDeProdutos;
+        Produto* produtos;
+} ListaDeProdutos;
+
+int carregarListaDeProdutos(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProdutos);
+int salvarListaDeProduto(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProdutos);
+
+int buscarProduto(const char* nomeDoProduto, Produto* dadosDoProduto);
+int buscarProduto(unsigned int codigoDoProduto, Produto* dadosDoProduto);
