@@ -2,6 +2,11 @@
 
 #include <stdio.h>
 
+int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
+{
+        // Se a quantidade de produtos != 0 e qdp % 50 == 0, alocar mais espaço
+}
+
 void pressioneEnterParaContinuar(void)
 {
         printf("Pressione ENTER para continuar.\n");
@@ -19,7 +24,7 @@ int abrirArquivo(FILE** arquivo, const char* nome)
                         return 1;
 
                 rewind(*arquivo);
-                return 0;
+                return 2;
         }
 
         return 0;
