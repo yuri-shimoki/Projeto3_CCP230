@@ -4,6 +4,18 @@
 
 #include "produto.h"
 
+typedef enum
+{
+        MENU_PRINCIPAL,
+        CONSULTAR_ESTOQUE,
+        COMPRAR_PRODUTO,
+        VENDER_PRODUTO,
+        GERAR_RELATORIO_DE_ESTOQUE,
+        SAIR
+} Menus;
+
+int menuPrincipal();
+
 int consultarEstoque(ListaDeProdutos* listaDeProdutos);
 
 int comprarProduto(ListaDeProdutos* listaDeProdutos);

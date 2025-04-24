@@ -1,6 +1,7 @@
 #include "produto.h"
 
 #include <stdio.h>
+#include <string.h>
 
 #include "funcoes_principais.h"
 
@@ -56,4 +57,32 @@ int salvarListaDeProdutos(FILE** arquivoDeEstoque, ListaDeProdutos* listaDeProdu
         }
 
         return 0;
+}
+
+int buscarProdutoPorNome(const char* nomeDoProduto, ListaDeProdutos* listaDeProdutos, Produto* produtoRequisitado)
+{
+        for (int i = 0; i < listaDeProdutos->quantidadeDeProdutos; ++i)
+        {
+                if (strcmp(listaDeProdutos->produtos[i].nome, nomeDoProduto) == 0)
+                {
+                        *produtoRequisitado = listaDeProdutos->produtos[i];
+                        return 0;
+                }
+        }
+
+        return 1;
+}
+
+int buscarProdutoPorCodigo(unsigned int codigoDoProduto, ListaDeProdutos* listaDeProdutos, Produto* produtoRequisitado)
+{
+        for (int i = 0; i < listaDeProdutos->quantidadeDeProdutos; ++i)
+        {
+                if (listaDeProdutos->produtos[i].codigo == codigoDoProduto)
+                {
+                        *produtoRequisitado = listaDeProdutos->produtos[i];
+                        return 0;
+                }
+        }
+
+        return 1;
 }

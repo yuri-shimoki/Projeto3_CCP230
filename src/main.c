@@ -40,8 +40,40 @@ int main(void)
                 break;
         }
 
+        Menus menuAtual = MENU_PRINCIPAL;
 
-        salvarListaDeProdutos(&arquivoDeEstoque, &listaDeProdutos);
+        while (menuAtual != SAIR)
+        {
+                switch (menuAtual)
+                {
+                case MENU_PRINCIPAL:
+                        
+                        break;
+                case CONSULTAR_ESTOQUE:
+                
+                        break;
+                case COMPRAR_PRODUTO:
+
+                        break;
+                case VENDER_PRODUTO:
+
+                        break;
+                case GERAR_RELATORIO_DE_ESTOQUE:
+
+                        break;
+                }
+        }
+
+        codigoDeRetorno = salvarListaDeProdutos(&arquivoDeEstoque, &listaDeProdutos);
+
+        switch (codigoDeRetorno)
+        {
+        case 1:
+        case 2:
+        case 3:
+                return 4;
+                break;
+        }
 
         free(listaDeProdutos.produtos);
         fclose(arquivoDeEstoque);
