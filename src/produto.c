@@ -81,9 +81,9 @@ int buscarProdutoPorCodigo(unsigned int codigoDoProduto, ListaDeProdutos* listaD
                 if (listaDeProdutos->produtos[i].codigo == codigoDoProduto)
                 {
                         *produtoRequisitado = listaDeProdutos->produtos[i];
-                        return 0;
+                        return i;
                 }
         }
 
-        return 1;
+        return -1;
 }

@@ -61,7 +61,7 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
                 int codigoDeRetorno;
                 codigoDeRetorno = buscarProdutoPorNome(primeiroNaoEspaco, listaDeProdutos, &produtoRequisitado);
 
-                if (codigoDeRetorno == 1)
+                if (codigoDeRetorno < 0)
                 {
                         puts("O codigo digitado nao corresponde a um produto existente.\n");
                         pressioneEnterParaContinuar();
@@ -85,7 +85,7 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
                 int codigoDeRetorno;
                 codigoDeRetorno = buscarProdutoPorCodigo(opcaoDigitada, listaDeProdutos, &produtoRequisitado);
 
-                if (codigoDeRetorno == 1)
+                if (codigoDeRetorno < 0)
                 {
                         puts("O codigo digitado nao corresponde a um produto existente.\n");
                         pressioneEnterParaContinuar();
@@ -103,9 +103,97 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
         return 0;
 }
 
+int comprarProduto(ListaDeProdutos* listaDeProdutos)
+{
+        int codigoDoProduto;
+        printf("Digite o codigo do produto: ");
+        scanf("%i", &codigoDoProduto);
+
+        Produto produtoRequisitado;
+        int codigoDeRetorno;
+        codigoDeRetorno = buscarProdutoPorCodigo(codigoDoProduto, listaDeProdutos, &produtoRequisitado);
+
+        if (codigoDeRetorno < 0)
+        {
+                puts("O codigo digitado nao corresponde a um produto existente.\n");
+                pressioneEnterParaContinuar();
+                return -1;
+        }
+
+        int quantidadeASerComprada;
+        printf("Digite a quantidade que deseja comprar: ");
+        scanf("%i", &quantidadeASerComprada);
+
+        if (quantidadeASerComprada > produtoRequisitado.quantidadeEmEstoque)
+        {
+                puts("Nao e possivel comprar mais produtos do que ha em estoque.\n");
+                pressioneEnterParaContinuar();
+                return -2;
+        }
+
+        if (quantidadeASerComprada < 0)
+        {
+                puts("Nao e possivel comprar uma quantidade negativa de produtos.\n");
+                pressioneEnterParaContinuar();
+                return -3;
+        }
+
+        listaDeProdutos->produtos[codigoDeRetorno].quantidadeEmEstoque -= quantidadeASerComprada;
+
+        return 0;
+}
+
+int venderProduto(ListaDeProdutos* listaDeProdutos)
+{
+        int codigoDoProduto;
+        printf("Digite o codigo do produto: ");
+        scanf("%i", &codigoDoProduto);
+
+        Produto produtoRequisitado;
+        int codigoDeRetorno;
+        codigoDeRetorno = buscarProdutoPorCodigo(codigoDoProduto, listaDeProdutos, &produtoRequisitado);
+
+        if (codigoDeRetorno < 0)
+        {
+                puts("O codigo digitado nao corresponde a um produto existente.\n");
+                pressioneEnterParaContinuar();
+                return -1;
+        }
+
+        int quantidadeASerVendida;
+        printf("Digite a quantidade que deseja vender: ");
+        scanf("%i", &quantidadeASerVendida);
+
+        if (quantidadeASerVendida < 0)
+        {
+                puts("Nao e possivel vender uma quantidade negativa de produtos.\n");
+                pressioneEnterParaContinuar();
+                return -2;
+        }
+
+        listaDeProdutos->produtos[codigoDeRetorno].quantidadeEmEstoque += quantidadeASerVendida;
+
+        return 0;
+}
+
 int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
 {
+        Produto produto;
+
+        produto.codigo = 0;
+        for (int i = 0; i < listaDeProdutos->quantidadeDeProdutos; ++i)
+                if (produto.codigo < listaDeProdutos->produtos[i].codigo)
+                        produto.codigo = listaDeProdutos->produtos[i].codigo;
+
+        ++produto.codigo;
+
+        printf("Digite o nome do produto: ");
         
+}
+
+void gerarRelatorioDeEstoque(ListaDeProdutos* produto)
+{
+
 }
 
 void pressioneEnterParaContinuar(void)
