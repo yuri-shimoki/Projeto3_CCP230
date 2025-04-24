@@ -47,10 +47,25 @@ int main(void)
                 switch (menuAtual)
                 {
                 case MENU_PRINCIPAL:
-                        
+                        codigoDeRetorno = menuPrincipal();
+                        menuAtual = codigoDeRetorno;
+
+                        switch (codigoDeRetorno)
+                        {
+                        case -1:
+                                menuAtual = MENU_PRINCIPAL;
+                                puts("O valor digitado nao e um numero.\n");
+                                pressioneEnterParaContinuar();
+                                break;
+                        case -2:
+                                menuAtual = MENU_PRINCIPAL;
+                                puts("O valor digitado nao e um numero de 0 a 4.\n");
+                                pressioneEnterParaContinuar();
+                                break;
+                        }
                         break;
                 case CONSULTAR_ESTOQUE:
-                
+
                         break;
                 case COMPRAR_PRODUTO:
 

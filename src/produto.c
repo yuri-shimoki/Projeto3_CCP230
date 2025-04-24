@@ -17,7 +17,7 @@ int carregarListaDeProdutos(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProd
                 return 1;
         }
 
-        listaDeProdutos->produtos = malloc(listaDeProdutos->quantidadeDeProdutos + 50);
+        listaDeProdutos->produtos = malloc(listaDeProdutos->quantidadeDeProdutos);
 
         fread(listaDeProdutos->produtos, listaDeProdutos->quantidadeDeProdutos, 1, arquivoDeEstoque);
 

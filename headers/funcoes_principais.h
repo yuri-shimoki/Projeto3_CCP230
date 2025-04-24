@@ -6,15 +6,15 @@
 
 typedef enum
 {
-        MENU_PRINCIPAL,
+        SAIR = 0,
         CONSULTAR_ESTOQUE,
         COMPRAR_PRODUTO,
         VENDER_PRODUTO,
         GERAR_RELATORIO_DE_ESTOQUE,
-        SAIR
+        MENU_PRINCIPAL
 } Menus;
 
-int menuPrincipal();
+int menuPrincipal(void);
 
 int consultarEstoque(ListaDeProdutos* listaDeProdutos);
 

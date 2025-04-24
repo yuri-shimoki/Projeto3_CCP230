@@ -1,6 +1,25 @@
 #include "funcoes_principais.h"
 
 #include <stdio.h>
+#include <ctype.h>
+
+int menuPrincipal(void)
+{
+        printf("---[MENU PRINCIPAL]---\nDigite qual opcao abaixo deseja realizar:\n1. Consultar estoque\n2. Comprar produto\n3. Vender produto\n4. Gerar relatorio de estoque\n0. Sair\nDigite um numero: ");
+
+        int opcaoDigitada;
+        scanf("%i", &opcaoDigitada);
+
+        printf("\n");
+
+        if (isdigit(opcaoDigitada) == 0)
+                return -1;
+
+        if (opcaoDigitada < 0 || opcaoDigitada > 4)
+                return -2;
+
+        return opcaoDigitada;
+}
 
 int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
 {
