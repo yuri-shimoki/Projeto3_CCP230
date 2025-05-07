@@ -187,7 +187,7 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
         printf("Digite o nome do produto: ");
 
         char nomeDoProduto[255];
-        scanf(" %254s", nomeDoProduto);
+        scanf(" %254[^\n]", nomeDoProduto);
 
         int indiceInicial, indiceFinal;
         trim(nomeDoProduto, &indiceInicial, &indiceFinal);
@@ -205,7 +205,7 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
         if (n == 0 || produto.precoUnitario < 0.0f)
         {
                 puts("O preco unitario digitado e invalido.\n");
-                pressioneEnterParaContinuar;
+                pressioneEnterParaContinuar();
                 return -1;
         }
 
@@ -216,12 +216,12 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
         if (n == 0)
         {
                 puts("A quantidade em estoque digitada e invalida.\n");
-                pressioneEnterParaContinuar;
+                pressioneEnterParaContinuar();
                 return -2;
         }
 
         printf("Digite a descricao do produto: ");
-        scanf(" %1022s", produto.descricao);
+        scanf(" %1022[^\n]", produto.descricao);
 
         ++listaDeProdutos->quantidadeDeProdutos;
         Produto* novoBlocoDeProdutos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos);
