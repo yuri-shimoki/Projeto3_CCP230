@@ -44,7 +44,8 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
                 printf("Digite o nome do produto: ");
 
                 char nomeDoProduto[255], nomeDoProdutoTrimmed[255];
-                scanf(" %254s", nomeDoProduto);
+                scanf(" %254[^\n]", nomeDoProduto);
+                puts("");
 
                 int indiceInicial, indiceFinal;
                 trim(nomeDoProduto, &indiceInicial, &indiceFinal);
@@ -77,6 +78,7 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
         {
                 printf("Digite o codigo do produto: ");
                 scanf("%i", &opcaoDigitada);
+                puts("");
 
                 Produto produtoRequisitado;
                 int codigoDeRetorno;
@@ -97,6 +99,7 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
                         produtoRequisitado.descricao);
         }
         
+        pressioneEnterParaContinuar();
         return 0;
 }
 
@@ -222,9 +225,10 @@ int cadastrarProduto(ListaDeProdutos* listaDeProdutos)
 
         printf("Digite a descricao do produto: ");
         scanf(" %1022[^\n]", produto.descricao);
+        puts("");
 
         ++listaDeProdutos->quantidadeDeProdutos;
-        Produto* novoBlocoDeProdutos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos);
+        Produto* novoBlocoDeProdutos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos * sizeof(Produto));
         memcpy(novoBlocoDeProdutos, listaDeProdutos->produtos, sizeof(Produto) * (listaDeProdutos->quantidadeDeProdutos - 1));
 
         free(listaDeProdutos->produtos);
@@ -266,6 +270,8 @@ int gerarRelatorioDeEstoque(ListaDeProdutos* listaDeProdutos)
                 }
         }
         
+        fclose(arquivoDeRelatorio);
+
         return 0;
 }
 

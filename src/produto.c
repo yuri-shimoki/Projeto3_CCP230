@@ -18,9 +18,9 @@ int carregarListaDeProdutos(FILE* arquivoDeEstoque, ListaDeProdutos* listaDeProd
                 return 1;
         }
 
-        listaDeProdutos->produtos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos);
+        listaDeProdutos->produtos = (Produto*) malloc(listaDeProdutos->quantidadeDeProdutos * sizeof(Produto));
 
-        fread(listaDeProdutos->produtos, listaDeProdutos->quantidadeDeProdutos, 1, arquivoDeEstoque);
+        fread(listaDeProdutos->produtos, sizeof(Produto), listaDeProdutos->quantidadeDeProdutos, arquivoDeEstoque);
 
         if (ferror(arquivoDeEstoque) != 0)
         {
@@ -49,7 +49,7 @@ int salvarListaDeProdutos(FILE** arquivoDeEstoque, ListaDeProdutos* listaDeProdu
                 return 2;
         }
 
-        fwrite(listaDeProdutos->produtos, listaDeProdutos->quantidadeDeProdutos, 1, *arquivoDeEstoque);
+        fwrite(listaDeProdutos->produtos, sizeof(Produto), listaDeProdutos->quantidadeDeProdutos, *arquivoDeEstoque);
 
         if (ferror(*arquivoDeEstoque) != 0)
         {
