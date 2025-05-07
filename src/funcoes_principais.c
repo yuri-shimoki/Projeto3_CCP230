@@ -103,6 +103,46 @@ int consultarEstoque(ListaDeProdutos* listaDeProdutos)
         return 0;
 }
 
+int venderProduto(ListaDeProdutos* listaDeProdutos)
+{
+        int codigoDoProduto;
+        printf("Digite o codigo do produto: ");
+        scanf("%i", &codigoDoProduto);
+
+        Produto produtoRequisitado;
+        int codigoDeRetorno;
+        codigoDeRetorno = buscarProdutoPorCodigo(codigoDoProduto, listaDeProdutos, &produtoRequisitado);
+
+        if (codigoDeRetorno < 0)
+        {
+                puts("O codigo digitado nao corresponde a um produto existente.\n");
+                pressioneEnterParaContinuar();
+                return -1;
+        }
+
+        int quantidadeASerVendida;
+        printf("Digite a quantidade que deseja comprar: ");
+        scanf("%i", &quantidadeASerVendida);
+
+        if (quantidadeASerVendida > produtoRequisitado.quantidadeEmEstoque)
+        {
+                puts("Nao e possivel vender mais produtos do que ha em estoque.\n");
+                pressioneEnterParaContinuar();
+                return -2;
+        }
+
+        if (quantidadeASerVendida < 0)
+        {
+                puts("Nao e possivel vender uma quantidade negativa de produtos.\n");
+                pressioneEnterParaContinuar();
+                return -3;
+        }
+
+        listaDeProdutos->produtos[codigoDeRetorno].quantidadeEmEstoque -= quantidadeASerVendida;
+
+        return 0;
+}
+
 int comprarProduto(ListaDeProdutos* listaDeProdutos)
 {
         int codigoDoProduto;
@@ -124,54 +164,14 @@ int comprarProduto(ListaDeProdutos* listaDeProdutos)
         printf("Digite a quantidade que deseja comprar: ");
         scanf("%i", &quantidadeASerComprada);
 
-        if (quantidadeASerComprada > produtoRequisitado.quantidadeEmEstoque)
-        {
-                puts("Nao e possivel comprar mais produtos do que ha em estoque.\n");
-                pressioneEnterParaContinuar();
-                return -2;
-        }
-
         if (quantidadeASerComprada < 0)
         {
                 puts("Nao e possivel comprar uma quantidade negativa de produtos.\n");
                 pressioneEnterParaContinuar();
-                return -3;
-        }
-
-        listaDeProdutos->produtos[codigoDeRetorno].quantidadeEmEstoque -= quantidadeASerComprada;
-
-        return 0;
-}
-
-int venderProduto(ListaDeProdutos* listaDeProdutos)
-{
-        int codigoDoProduto;
-        printf("Digite o codigo do produto: ");
-        scanf("%i", &codigoDoProduto);
-
-        Produto produtoRequisitado;
-        int codigoDeRetorno;
-        codigoDeRetorno = buscarProdutoPorCodigo(codigoDoProduto, listaDeProdutos, &produtoRequisitado);
-
-        if (codigoDeRetorno < 0)
-        {
-                puts("O codigo digitado nao corresponde a um produto existente.\n");
-                pressioneEnterParaContinuar();
-                return -1;
-        }
-
-        int quantidadeASerVendida;
-        printf("Digite a quantidade que deseja vender: ");
-        scanf("%i", &quantidadeASerVendida);
-
-        if (quantidadeASerVendida < 0)
-        {
-                puts("Nao e possivel vender uma quantidade negativa de produtos.\n");
-                pressioneEnterParaContinuar();
                 return -2;
         }
 
-        listaDeProdutos->produtos[codigoDeRetorno].quantidadeEmEstoque += quantidadeASerVendida;
+        listaDeProdutos->produtos[codigoDeRetorno].quantidadeEmEstoque += quantidadeASerComprada;
 
         return 0;
 }
